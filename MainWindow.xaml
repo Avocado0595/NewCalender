@@ -1,0 +1,296 @@
+﻿<Window x:Class="MyCalender.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCalender"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="MyCalender" Height="450" Width="850"
+        
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+         Closed="Window_Closed">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+
+                
+                <ToggleButton  x:Name="ckbNoti" Unchecked="ckbNoti_Unchecked" Checked="ckbNoti_Checked"></ToggleButton>
+                <TextBlock Margin="0 0 10 0" VerticalAlignment="Center">Nhắc nhở</TextBlock>
+                <ComboBox SelectionChanged="cbxTime_SelectionChanged" IsEnabled="{Binding ElementName=ckbNoti, Path=IsChecked}" x:Name="cbxTime" Width="40"
+                    SelectedIndex="0" VerticalAlignment="Center"
+                    IsEditable="True">
+                    <ComboBox.Text>
+                        <Binding Path="SelectedTextTwo" Mode="OneWayToSource"
+                            UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </ComboBox.Text>
+                    <ComboBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ComboBox.ItemsPanel>
+                </ComboBox>
+
+                <TextBlock VerticalAlignment="Center" Margin="5 0 0 0">phút</TextBlock>
+            </StackPanel>
+
+            <Grid Grid.Column="1">
+                <DatePicker Width="200" SelectedDate="{x:Static sys:DateTime.Now}"
+                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" x:Name="dtpChosenDate" />
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Button Width="100" Content="Hôm nay" Click="btnToDay_Click"></Button>
+            </Grid>
+
+        </Grid>
+
+        <Grid Margin="3" HorizontalAlignment="Stretch" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width ="1.5*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Button Content="Tháng trước" Margin="5 0 5 0" Click="btnPrevMonth_Click"></Button>
+            </Grid>
+            <Grid Grid.Column="1" Margin="3 0 3 0">
+                <Button Content="Thứ 2" Padding="0"></Button>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Button Content="Thứ 3" Padding="0" Margin="3 0 3 0"></Button>
+            </Grid>
+            <Grid Grid.Column="3">
+                <Button Content="Thứ 4" Padding="0" Margin="3 0 3 0"></Button>
+            </Grid>
+            <Grid Grid.Column="4">
+                <Button Content="Thứ 5" Padding="0" Margin="3 0 3 0"></Button>
+            </Grid>
+            <Grid Grid.Column="5">
+                <Button Content="Thứ 6" Padding="0" Margin="3 0 3 0"></Button>
+            </Grid>
+            <Grid Grid.Column="6">
+                <Button Content="Thứ 7" Padding="0" Margin="3 0 3 0"></Button>
+            </Grid>
+            <Grid Grid.Column="7">
+                <Button Content="Chủ nhật" Padding="0" Margin="3 0 3 0"></Button>
+            </Grid>
+            <Grid Grid.Column="8">
+                <Button Content="Tháng sau" Margin="5 0 5 0" Click="btnNextMonth_Click"></Button>
+            </Grid>
+        </Grid>
+
+
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" Margin="3" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width ="1.5*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1*"></ColumnDefinition>
+                <ColumnDefinition Width ="1.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+               
+            </Grid>
+            <Grid Grid.Column="1" Margin="3 0 3 0" x:Name="gridMon">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="gridW11">
+                   
+                </Grid>
+                <Grid Grid.Row="1" x:Name="gridW21">
+                </Grid>
+                <Grid Grid.Row="2" x:Name="gridW31">
+                </Grid>
+                <Grid Grid.Row="3" x:Name="gridW41">
+                </Grid>
+                <Grid Grid.Row="4" x:Name="gridW51">
+                </Grid>
+                <Grid Grid.Row="5" x:Name="gridW61">
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Column="2" Margin="3 0 3 0" x:Name="gridTue" >
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="gridW12">
+                </Grid>
+                <Grid Grid.Row="1" x:Name="gridW22">
+                </Grid>
+                <Grid Grid.Row="2" x:Name="gridW32">
+                </Grid>
+                <Grid Grid.Row="3" x:Name="gridW42">
+                </Grid>
+                <Grid Grid.Row="4" x:Name="gridW52">
+                </Grid>
+                <Grid Grid.Row="5" x:Name="gridW62">
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Column="3" Margin="3 0 3 0" x:Name="gridWed">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="gridW13">
+                </Grid>
+                <Grid Grid.Row="1" x:Name="gridW23">
+                </Grid>
+                <Grid Grid.Row="2" x:Name="gridW33">
+                </Grid>
+                <Grid Grid.Row="3" x:Name="gridW43">
+                </Grid>
+                <Grid Grid.Row="4" x:Name="gridW53">
+                </Grid>
+                <Grid Grid.Row="5" x:Name="gridW63">
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Column="4" Margin="3 0 3 0" x:Name="gridThu">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="gridW14">
+                </Grid>
+                <Grid Grid.Row="1" x:Name="gridW24">
+                </Grid>
+                <Grid Grid.Row="2" x:Name="gridW34">
+                </Grid>
+                <Grid Grid.Row="3" x:Name="gridW44">
+                </Grid>
+                <Grid Grid.Row="4" x:Name="gridW54">
+                </Grid>
+                <Grid Grid.Row="5" x:Name="gridW64">
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Column="5" Margin="3 0 3 0" x:Name="gridFri">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="gridW15">
+                </Grid>
+                <Grid Grid.Row="1" x:Name="gridW25">
+                </Grid>
+                <Grid Grid.Row="2" x:Name="gridW35">
+                </Grid>
+                <Grid Grid.Row="3" x:Name="gridW45">
+                </Grid>
+                <Grid Grid.Row="4" x:Name="gridW55">
+                </Grid>
+                <Grid Grid.Row="5" x:Name="gridW65">
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Column="6" Margin="3 0 3 0" x:Name="gridSat">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="gridW16">
+                </Grid>
+                <Grid Grid.Row="1" x:Name="gridW26">
+                </Grid>
+                <Grid Grid.Row="2" x:Name="gridW36">
+                </Grid>
+                <Grid Grid.Row="3" x:Name="gridW46">
+                </Grid>
+                <Grid Grid.Row="4" x:Name="gridW56">
+                </Grid>
+                <Grid Grid.Row="5" x:Name="gridW66">
+                </Grid>
+
+            </Grid>
+            <Grid Grid.Column="7" Margin="3 0 3 0" x:Name="gridSun">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="gridW10">
+                </Grid>
+                <Grid Grid.Row="1" x:Name="gridW20">
+                </Grid>
+                <Grid Grid.Row="2" x:Name="gridW30">
+                </Grid>
+                <Grid Grid.Row="3" x:Name="gridW40">
+                </Grid>
+                <Grid Grid.Row="4" x:Name="gridW50">
+                </Grid>
+                <Grid Grid.Row="5" x:Name="gridW60">
+                </Grid>
+            </Grid>
+            <StackPanel Grid.Column="8" Margin="3 0 3 0">
+            </StackPanel>
+            
+        </Grid>
+
+    </Grid>
+</Window>
